@@ -21,6 +21,9 @@ NA
 5. ... aws pdf hosting & mailchimp automations?
 
 #### notes:
+* [databento docs](https://docs.databento.com/)
+* [databento python wrapper](https://bit.ly/3Iu88pi)
+* [databento smart symbology](https://bit.ly/3ilxrza)
 
 ***
 ### Reference:
