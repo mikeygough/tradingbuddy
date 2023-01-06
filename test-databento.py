@@ -4,7 +4,12 @@ import databento as db
 # authenticate
 client = db.Historical(CONSUMER_KEY)
 
-# -- get ESM2 and NQZ2 data in 1-second OHLCV bars:
+SYMBOLS = ["ES.n.0", "NQ.n.0"] # smart symbology
+SCHEMA = "ohlcv-1d"
+START = "2022-06-01T00:00" # start date
+END = "2022-06-05T00:10" # end date
+
+# -- [TEST] get ESM2 and NQZ2 data in 1-second OHLCV bars:
 # data = client.timeseries.stream(
 #     dataset="GLBX.MDP3",
 #     symbols=["ESM2", "NQZ2"],
@@ -14,17 +19,51 @@ client = db.Historical(CONSUMER_KEY)
 # )
 # data.replay(print)
 
-# -- get the ES future with the highest open interest.
-data = client.timeseries.stream(
+# -- get the record count of the time series data query:
+count = client.metadata.get_record_count(
     dataset="GLBX.MDP3",
-    symbols=["ES.n.0"], # smart symbology
+    symbols=SYMBOLS,
+    start=START,
+    end=END,
     stype_in='smart',
-    schema="ohlcv-1d",
-    start="2022-06-06T00:00",
-    end="2022-06-07T00:10",
-    limit=1
+    schema="ohlcv-1d"
 )
+print("count", count)
 
-df = data.to_df()
-print(df.iloc[0].to_json(indent=4))
 
+# -- get the billable uncompressed raw binary size: 
+size = client.metadata.get_billable_size(
+    dataset="GLBX.MDP3",
+    symbols=SYMBOLS,
+    start=START,
+    end=END,
+    stype_in='smart',
+    schema="ohlcv-1d"
+)
+print("billable size (bytes)", size)
+
+
+# -- get cost estimate in US Dollars:
+cost = client.metadata.get_cost(
+    dataset="GLBX.MDP3",
+    symbols=SYMBOLS,
+    start=START,
+    end=END,
+    stype_in='smart',
+    schema="ohlcv-1d"
+)
+print("cost (US Dollars)", cost)
+
+
+# -- get the ES future with the highest open interest:
+# data = client.timeseries.stream(
+#     dataset="GLBX.MDP3",
+#     symbols=["ES.n.0", "NQ.n.0"], # smart symbology
+#     stype_in='smart',
+#     schema="ohlcv-1d",
+#     start="2022-06-01T00:00",
+#     end="2022-06-05T00:10"
+# )
+# df = data.to_df()
+# print(df.iloc[0].to_json(indent=4))
+# df.to_csv('test-export.csv')
