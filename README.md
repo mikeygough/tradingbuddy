@@ -15,6 +15,9 @@ NA
 
 #### in development:
 1. databento data pulls
+    * product_id is set by the publisher?
+    * what format is ts_event?
+    * ohlc is a huge number needs to be normalized
 2. pandas & numpy numerical analysis
 3. matplotlib / plotly visualizations
 4. pypdf report generation

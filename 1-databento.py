@@ -7,18 +7,9 @@ client = db.Historical(CONSUMER_KEY)
 # set attributes
 SYMBOLS = ["ES.n.0", "NQ.n.0"] # smart symbology
 SCHEMA = "ohlcv-1d"
-START = "2022-06-01T00:00" # start date
-END = "2022-06-30T00:10" # end date
+START = "2022-03-01T00:00" # start date
+END = "2022-05-31T00:10" # end date
 
-# -- [TEST] get ESM2 and NQZ2 data in 1-second OHLCV bars:
-# data = client.timeseries.stream(
-#     dataset="GLBX.MDP3",
-#     symbols=["ESM2", "NQZ2"],
-#     schema="ohlcv-1s",
-#     start="2022-06-06T14:30",
-#     end="2022-06-06T14:40",
-# )
-# data.replay(print)
 
 # -- get the record count of the time series data query:
 count = client.metadata.get_record_count(
@@ -67,5 +58,4 @@ data = client.timeseries.stream(
 
 df = data.to_df()
 print(df)
-# print(df.iloc[0].to_json(indent=4))
-df.to_csv('static/test-export.csv')
+df.to_csv('static/data.csv')
