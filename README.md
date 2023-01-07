@@ -5,20 +5,20 @@ given list of symbols, download 3 months of historical closes, generate .pdf wit
 
 * X current price relative to 3-month high and low
 * X daily move standard deviations
-* 5-day forecast
+* X 5-day forecast
 * X 3-month percent return
 * ... pairs trading ratios?
 * ... hedge ratios?
 
 #### currently supports:
-NA
+* data download from databento
+* statistical calculations
 
 #### in development:
 1. databento data pulls
-    * product_id is set by the publisher?
-    * what format is ts_event?
-    * ohlc is a huge number needs to be normalized
-2. pandas & numpy numerical analysis
+    * product_id is set by the publisher? [can be matched](https://bit.ly/3jTtQsB)
+2. pandas statistcal analysis
+    * roll these into class attributes
 3. matplotlib / plotly visualizations
 4. pypdf report generation
 5. ... aws pdf hosting & mailchimp automations?
