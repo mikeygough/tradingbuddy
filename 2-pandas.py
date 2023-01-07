@@ -29,6 +29,7 @@ def expected_range(s, v, dte, y=365):
     dte: days to expiration
     y: trading period (one year) '''
     return s * v * np.sqrt(dte / y)
+    
 UPPER_1 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 1)
 UPPER_2 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 2)
 UPPER_3 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 3)

@@ -20,7 +20,7 @@ given list of symbols, download 3 months of historical closes, generate .pdf wit
 2. pandas statistcal analysis
     * roll these into class attributes
 3. matplotlib / plotly visualizations
-4. pypdf report generation
+4. pyfpdf report generation
 5. ... aws pdf hosting & mailchimp automations?
 
 #### notes:
