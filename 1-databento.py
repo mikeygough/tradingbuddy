@@ -6,6 +6,7 @@ client = db.Historical(CONSUMER_KEY)
 
 # set attributes
 SYMBOLS = ["ES.n.0", "NQ.n.0"] # smart symbology
+SYMBOLS = ["ES.n.0"]
 SCHEMA = "ohlcv-1d"
 START = "2022-03-01T00:00" # start date
 END = "2022-05-31T00:10" # end date
@@ -56,6 +57,7 @@ data = client.timeseries.stream(
     schema="ohlcv-1d"
 )
 
-df = data.to_df()
-print(df)
+# pretty price and time stamps
+df = data.to_df(pretty_px=True, pretty_ts=True)
+# print(df)
 df.to_csv('static/data.csv')

@@ -1,14 +1,14 @@
 ### About:
 **finnews** is my final project for [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python).
 
-given list of symbole, download 3 months of historical closes, generate .pdf with...
+given list of symbols, download 3 months of historical closes, generate .pdf with...
 
-* current price relative to 3-month high and low
-* daily move standard deviations
+* X current price relative to 3-month high and low
+* X daily move standard deviations
 * 5-day forecast
-* 3-month percent return
-* pairs trading ratios?
-* hedge ratios?
+* X 3-month percent return
+* ... pairs trading ratios?
+* ... hedge ratios?
 
 #### currently supports:
 NA
