@@ -158,7 +158,7 @@ pdf.cell(w=40, h=10, txt='Lower 4: {:.2f}'.format(LOWER_4),
 pdf.cell(w=40, h=10, txt='Lower 5: {:.2f}'.format(LOWER_5),
     ln=1)
 
-pdf.output('tuto1.pdf', 'F')
+pdf.output('2-pandas-fpdf.pdf', 'F')
 
 
 
