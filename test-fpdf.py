@@ -82,10 +82,34 @@ def draw_hilo(high, low, close,
     # draw circle at position
     draw_circle(xpos=circle_x_position, ypos=ypos_start-1.5, rad=3)
 
+    # add annotations
+    pdf.set_font('Helvetica', 'B', 12)
+    
+    # draw low text
+    pdf.set_xy(xpos_start - pdf.get_string_width('{}'.format(low)) - 2,
+               ypos_start-8)
+    pdf.cell(h=10, txt='{}'.format(low), align='L')
+    pdf.set_xy(xpos_start - pdf.get_string_width('Low') - 2, ypos_start-2)
+    pdf.cell(h=10, txt='Low', align='L')
+
+    # draw high text
+    pdf.set_xy(xpos_end, ypos_end-8)
+    pdf.cell(h=10, txt='{}'.format(high), align='L')
+    pdf.set_xy(xpos_end, ypos_end-2)
+    pdf.cell(h=10, txt='High', align='L')
+    
+    # draw close text
+    pdf.set_font('Helvetica', 'B', 14)
+
+    pdf.set_xy(circle_x_position - (pdf.get_string_width('{}'.format(close)) / 2),       ypos_end-12)
+    pdf.cell(h=10, txt='{}'.format(close), align='C')
+    # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
+    # pdf.cell(h=10, txt='Close', align='C')
+
 
 # draw_circle(xpos=40, ypos=50)
 
-draw_hilo(high=100, low=0, close=50, 
+draw_hilo(high=238.67, low=44.89, close=45, 
           xpos_start=40, ypos_start=100,
           xpos_end=80, ypos_end=100)
 
