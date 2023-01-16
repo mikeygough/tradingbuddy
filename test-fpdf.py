@@ -83,23 +83,46 @@ def draw_hilo(high, low, close,
     # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
     # pdf.cell(h=10, txt='Close', align='C')
 
-
-def draw_sd():
-    pdf.set_line_width(1)
-    pdf.set_fill_color(r=255, g=0, b=0)
-    # pdf.arc(x=75, y=75, a=25, b=25, start_angle=90, end_angle=260, style="FD")
-    pdf.arc(x=105, y=75, a=40, b=75, start_angle=180, end_angle=360, style="F")
-
-
+# symbol circle
 draw_circle(xpos=10, ypos=10, symbol='/ES')
 
+# high low close
 draw_hilo(high=100, low=10, close=79, 
           xpos_start=55, ypos_start=22,
           xpos_end=100, ypos_end=22)
 
-# draw_sd()
+# standard deviation
+# std lines
+pdf.set_line_width(0.5)
+pdf.set_draw_color(240)
+#155 is the middle
+# ~1 sd
+pdf.line(x1=148, y1=7,
+         x2=148, y2=37)
+pdf.line(x1=164, y1=7,
+         x2=164, y2=37)
+# ~2 sd
+pdf.line(x1=140, y1=7,
+         x2=140, y2=37)
+pdf.line(x1=172, y1=7,
+         x2=172, y2=37)
+# ~3 sd
+pdf.line(x1=130, y1=7,
+         x2=130, y2=37)
+pdf.line(x1=182, y1=7,
+         x2=182, y2=37)
+
+# base line
+pdf.set_line_width(0.5)
+pdf.set_draw_color(240)
+pdf.line(x1=125, y1=35,
+         x2=186, y2=35)
+
+# standard curve
 pdf.image('static/normal_distribution.png', x=105, y=7,
     h=30, w=100)
+
+
 
 # output file
 pdf.output('test-fpdf.pdf')
