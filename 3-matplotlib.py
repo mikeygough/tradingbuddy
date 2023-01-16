@@ -6,6 +6,7 @@ from fpdf import FPDF
 import matplotlib.pyplot as plt
 
 df = pd.read_csv('static/data.csv')
+df['ts_event'] = pd.to_datetime(df['ts_event'])
 
 # create pdf
 pdf = FPDF(orientation='L')
@@ -18,4 +19,6 @@ print(df.head())
 
 fig, ax = plt.subplots()
 ax.plot(df['ts_event'], df['close'])
-plt.show()
+plt.savefig('static/chart.png', bbox_inches='tight')
+# plt.show()
+

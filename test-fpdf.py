@@ -130,7 +130,9 @@ pdf.line(x1=125, y1=35,
 pdf.image('static/normal_distribution.png', x=105, y=7,
     h=30, w=100)
 
-
+# sample chart
+pdf.image('static/chart.png', x=155, y=7,
+    h=30, w=100)
 
 # output file
 pdf.output('test-fpdf.pdf')
