@@ -33,7 +33,7 @@ def draw_hilo(high, low, close,
               xpos_start, ypos_start,
               xpos_end, ypos_end):
     '''
-    draws a high-low line with circle at the current price
+    draws a high-low-close line with circle at the current price
     high: underlying high price
     low: underlying low price
     xpos_start: abscissa of first point
@@ -83,6 +83,12 @@ def draw_hilo(high, low, close,
     # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
     # pdf.cell(h=10, txt='Close', align='C')
 
+def draw_sd():
+    '''
+    draws a normal distribution with 1, 2 & 3 sd movement values
+    '''
+    pass
+
 # symbol circle
 draw_circle(xpos=10, ypos=10, symbol='/ES')
 
@@ -94,24 +100,24 @@ draw_hilo(high=100, low=10, close=79,
 # standard deviation
 # std lines
 pdf.set_line_width(0.5)
-pdf.set_draw_color(99, 99, 99)
+pdf.set_draw_color(37, 37, 37)
 #155 is the middle
 # ~1 sd
-pdf.line(x1=148, y1=7,
+pdf.line(x1=148, y1=23,
          x2=148, y2=35)
-pdf.line(x1=164, y1=7,
+pdf.line(x1=164, y1=22,
          x2=164, y2=35)
 # ~2 sd
-pdf.set_draw_color(189, 189, 189)
-pdf.line(x1=140, y1=7,
+pdf.set_draw_color(82, 82, 82)
+pdf.line(x1=140, y1=31,
          x2=140, y2=35)
-pdf.line(x1=172, y1=7,
+pdf.line(x1=172, y1=30.5,
          x2=172, y2=35)
 # ~3 sd
-pdf.set_draw_color(240, 240, 240)
-pdf.line(x1=130, y1=7,
+pdf.set_draw_color(115, 115, 115)
+pdf.line(x1=130, y1=34,
          x2=130, y2=35)
-pdf.line(x1=182, y1=7,
+pdf.line(x1=182, y1=34.5,
          x2=182, y2=35)
 
 # base line
