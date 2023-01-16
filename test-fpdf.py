@@ -5,7 +5,10 @@ import numpy as np
 pdf = FPDF(orientation='L')
 pdf.set_margin(0)
 print("page layout", pdf.page_layout)
+
+# unit mm
 print("default page dimensions", pdf.default_page_dimensions)
+# (841.89, 595.28)mm
 pdf.set_line_width(0)
 
 # add page
@@ -131,7 +134,7 @@ pdf.image('static/normal_distribution.png', x=105, y=7,
     h=30, w=100)
 
 # sample chart
-pdf.image('static/chart.png', x=155, y=7,
+pdf.image('static/chart.png', x=185, y=8,
     h=30, w=100)
 
 # output file
