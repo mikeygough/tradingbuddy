@@ -86,11 +86,50 @@ def draw_hilo(high, low, close,
     # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
     # pdf.cell(h=10, txt='Close', align='C')
 
-def draw_sd():
+def draw_sd(xpos, ypos):
     '''
     draws a normal distribution with 1, 2 & 3 sd movement values
     '''
-    pass
+    # standard deviation
+    # std lines
+    pdf.set_line_width(0.5)
+    pdf.set_draw_color(37, 37, 37)
+    
+    #155 is the middle
+    middle = xpos + 50
+    
+    # ~1 sd
+    pdf.line(x1=xpos+43, y1=ypos+16,
+             x2=xpos+43, y2=ypos+28)
+    pdf.line(x1=xpos+59, y1=ypos+15,
+             x2=xpos+59, y2=ypos+28)
+    # ~2 sd
+    pdf.set_draw_color(82, 82, 82)
+    pdf.line(x1=xpos+35, y1=ypos+24,
+             x2=xpos+35, y2=ypos+28)
+    pdf.line(x1=xpos+67, y1=ypos+23.5,
+             x2=xpos+67, y2=ypos+28)
+    # ~3 sd
+    pdf.set_draw_color(115, 115, 115)
+    pdf.line(x1=xpos+25, y1=ypos+28,
+             x2=xpos+25, y2=ypos+28)
+    pdf.line(x1=xpos+77, y1=ypos+27.5,
+             x2=xpos+77, y2=ypos+28)
+
+    # base line
+    pdf.set_line_width(0.5)
+    pdf.set_draw_color(0, 0, 0)
+    pdf.line(x1=xpos+20, y1=ypos+28,
+             x2=xpos+81, y2=ypos+28)
+
+    # standard curve
+    pdf.image('static/normal_distribution.png', x=xpos, y=ypos,
+    h=30, w=100)
+
+# draw sd
+draw_sd(xpos=105, ypos=7)
+
+draw_sd(xpos=105, ypos=50)
 
 # symbol circle
 draw_circle(xpos=10, ypos=10, symbol='/ES')
@@ -100,41 +139,9 @@ draw_hilo(high=100, low=10, close=79,
           xpos_start=55, ypos_start=22,
           xpos_end=100, ypos_end=22)
 
-# standard deviation
-# std lines
-pdf.set_line_width(0.5)
-pdf.set_draw_color(37, 37, 37)
-#155 is the middle
-# ~1 sd
-pdf.line(x1=148, y1=23,
-         x2=148, y2=35)
-pdf.line(x1=164, y1=22,
-         x2=164, y2=35)
-# ~2 sd
-pdf.set_draw_color(82, 82, 82)
-pdf.line(x1=140, y1=31,
-         x2=140, y2=35)
-pdf.line(x1=172, y1=30.5,
-         x2=172, y2=35)
-# ~3 sd
-pdf.set_draw_color(115, 115, 115)
-pdf.line(x1=130, y1=34,
-         x2=130, y2=35)
-pdf.line(x1=182, y1=34.5,
-         x2=182, y2=35)
-
-# base line
-pdf.set_line_width(0.5)
-pdf.set_draw_color(0, 0, 0)
-pdf.line(x1=125, y1=35,
-         x2=186, y2=35)
-
-# standard curve
-pdf.image('static/normal_distribution.png', x=105, y=7,
-    h=30, w=100)
 
 # sample chart
-pdf.image('static/chart.png', x=185, y=8,
+pdf.image('static/chart.png', x=190, y=8,
     h=30, w=100)
 
 # output file
