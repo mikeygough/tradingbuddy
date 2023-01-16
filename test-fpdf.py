@@ -11,34 +11,6 @@ pdf.set_line_width(0)
 # add page
 pdf.add_page()
 
-# set font
-pdf.set_font('Helvetica', 'B', 16)
-
-# # add some text
-# pdf.set_xy(10, 10)
-# print("xpos before text", pdf.get_x())
-# print("ypos before text", pdf.get_y())
-# pdf.cell(40, 10, 'Current prices relative to recent highs and lows')
-
-# # add a circle!
-# print("xpos after text, before circle", pdf.get_x())
-# print("ypos after text, before circle", pdf.get_y())
-# pdf.set_line_width(1)
-# pdf.set_draw_color(240)
-# pdf.set_fill_color(r=230, g=30, b=180)
-# pdf.circle(x=10, y=30, r=25, style='F')
-# print("xpos after circle, before /es", pdf.get_x())
-# print("ypos after circle, before /es", pdf.get_y())
-
-# # reset position
-# pdf.set_xy(10, 37)
-# pdf.cell(w=25, h=10, txt='/ES', align='C')
-# print("xpos after /es", pdf.get_x())
-# print("ypos after /es", pdf.get_y())
-
-# # test getting string width
-# print("string width", pdf.get_string_width('/ES'))
-
 def draw_circle(xpos, ypos, rad=25, symbol=''):
     '''
     draws a filled in circle of radius rad as xpos, ypos
@@ -112,21 +84,20 @@ def draw_hilo(high, low, close,
     # pdf.cell(h=10, txt='Close', align='C')
 
 
+def draw_sd():
+    pdf.set_line_width(1)
+    pdf.set_fill_color(r=255, g=0, b=0)
+    # pdf.arc(x=75, y=75, a=25, b=25, start_angle=90, end_angle=260, style="FD")
+    pdf.arc(x=105, y=75, a=40, b=75, start_angle=180, end_angle=360, style="F")
+
+
 draw_circle(xpos=10, ypos=10, symbol='/ES')
-draw_circle(xpos=10, ypos=50, symbol='/GC')
-draw_circle(xpos=10, ypos=90, symbol='/CL')
 
 draw_hilo(high=100, low=10, close=79, 
           xpos_start=55, ypos_start=22,
           xpos_end=100, ypos_end=22)
 
-draw_hilo(high=100, low=10, close=79, 
-          xpos_start=55, ypos_start=62,
-          xpos_end=100, ypos_end=62)
-
-draw_hilo(high=100, low=10, close=79, 
-          xpos_start=55, ypos_start=102,
-          xpos_end=100, ypos_end=102)
+draw_sd()
 
 # output file
 pdf.output('test-fpdf.pdf')
