@@ -94,27 +94,29 @@ draw_hilo(high=100, low=10, close=79,
 # standard deviation
 # std lines
 pdf.set_line_width(0.5)
-pdf.set_draw_color(240)
+pdf.set_draw_color(99, 99, 99)
 #155 is the middle
 # ~1 sd
 pdf.line(x1=148, y1=7,
-         x2=148, y2=37)
+         x2=148, y2=35)
 pdf.line(x1=164, y1=7,
-         x2=164, y2=37)
+         x2=164, y2=35)
 # ~2 sd
+pdf.set_draw_color(189, 189, 189)
 pdf.line(x1=140, y1=7,
-         x2=140, y2=37)
+         x2=140, y2=35)
 pdf.line(x1=172, y1=7,
-         x2=172, y2=37)
+         x2=172, y2=35)
 # ~3 sd
+pdf.set_draw_color(240, 240, 240)
 pdf.line(x1=130, y1=7,
-         x2=130, y2=37)
+         x2=130, y2=35)
 pdf.line(x1=182, y1=7,
-         x2=182, y2=37)
+         x2=182, y2=35)
 
 # base line
 pdf.set_line_width(0.5)
-pdf.set_draw_color(240)
+pdf.set_draw_color(0, 0, 0)
 pdf.line(x1=125, y1=35,
          x2=186, y2=35)
 
