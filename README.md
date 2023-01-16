@@ -20,7 +20,7 @@ broken up into five main asset classes
 * ***commodities:*** /MGC, /SIL, /MHG, /MCL
 
 ### schema (draft)
-![schema-draft](static/schema.png)
+![alt text](static/schema.png)
 
 #### currently supports:
 * data download from databento
