@@ -97,7 +97,9 @@ draw_hilo(high=100, low=10, close=79,
           xpos_start=55, ypos_start=22,
           xpos_end=100, ypos_end=22)
 
-draw_sd()
+# draw_sd()
+pdf.image('static/normal_distribution.png', x=105, y=7,
+    h=30, w=100)
 
 # output file
 pdf.output('test-fpdf.pdf')
