@@ -77,6 +77,7 @@ def draw_hilo(high, low, close,
     # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
     # pdf.cell(h=10, txt='Close', align='C')
 
+
 def draw_sd(xpos, ypos):
     '''
     draws a normal distribution with 1, 2 & 3 sd movement values
@@ -116,6 +117,7 @@ def draw_sd(xpos, ypos):
     # standard curve
     pdf.image('static/normal_distribution.png', x=xpos, y=ypos,
     h=30, w=100)
+
 
 def main():
     df = pd.read_csv('static/data.csv')

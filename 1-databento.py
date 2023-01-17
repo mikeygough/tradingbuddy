@@ -1,63 +1,88 @@
 from config import *
 import databento as db
+import warnings
+warnings.filterwarnings('ignore')
 
 # authenticate
 client = db.Historical(CONSUMER_KEY)
 
-# set attributes
-SYMBOLS = ["ES.n.0", "NQ.n.0"] # smart symbology
-SYMBOLS = ["ES.n.0"]
-SCHEMA = "ohlcv-1d"
-START = "2022-03-01T00:00" # start date
-END = "2022-05-31T00:10" # end date
+def db_download_data(SYMBOLS,
+                     SCHEMA,
+                     START,
+                     END,
+                     FNAME):
+    '''
+    wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading. user must enter 'y' to proceed with download.
+    
+    symbols: list of symbols in smart format. for example, ["ES.n.0", "NQ.n.0"] returns the future for each root with the highest open interest
+    
+    schema: string of data schema. for example "ohlcv-1d"  # open, high, low, close, volume in daily increments
+
+    start: string start date. for example, "2022-03-01T00:00"
+
+    end: string end date. for example, "2022-05-31T00:10"
+
+    fname: string file export name. for example, "static/data.csv". must include .csv.
+    '''
+
+    # -- get the record count of the time series data query:
+    count = client.metadata.get_record_count(
+        dataset='GLBX.MDP3',
+        symbols=SYMBOLS,
+        start=START,
+        end=END,
+        stype_in='smart',
+        schema=SCHEMA
+    )
+    print("count", count)
 
 
-# -- get the record count of the time series data query:
-count = client.metadata.get_record_count(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("count", count)
+    # -- get the billable uncompressed raw binary size: 
+    size = client.metadata.get_billable_size(
+        dataset='GLBX.MDP3',
+        symbols=SYMBOLS,
+        start=START,
+        end=END,
+        stype_in='smart',
+        schema=SCHEMA
+    )
+    print("billable size (bytes)", size)
 
 
-# -- get the billable uncompressed raw binary size: 
-size = client.metadata.get_billable_size(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("billable size (bytes)", size)
+    # -- get cost estimate in US Dollars:
+    cost = client.metadata.get_cost(
+        dataset='GLBX.MDP3',
+        symbols=SYMBOLS,
+        start=START,
+        end=END,
+        stype_in='smart',
+        schema=SCHEMA
+    )
+    print("cost (US Dollars)", cost)
 
+    # -- get the data
+    data = client.timeseries.stream(
+        dataset='GLBX.MDP3',
+        symbols=SYMBOLS,
+        start=START,
+        end=END,
+        stype_in='smart',
+        schema=SCHEMA
+    )
 
-# -- get cost estimate in US Dollars:
-cost = client.metadata.get_cost(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("cost (US Dollars)", cost)
+    if input("Proceed with the download? (y/n): ") != 'y':
+        print("Aborting download...")
+        exit()
+    else:
+        print("Proceeding with download...")
+        pass
 
-# -- get the ES future with the highest open interest:
-data = client.timeseries.stream(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
+    # pretty price and time stamps
+    df = data.to_df(pretty_px=True, pretty_ts=True)
+    df.to_csv('{}'.format(fname))
 
-# pretty price and time stamps
-df = data.to_df(pretty_px=True, pretty_ts=True)
-# print(df)
-df.to_csv('static/data.csv')
+db_download_data(SYMBOLS=["ES.n.0"],
+                SCHEMA="ohlcv-1d",
+                START="2022-03-01T00:00",
+                END="2022-05-31T00:10",
+                FNAME="static/data.csv")
