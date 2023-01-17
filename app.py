@@ -49,6 +49,7 @@ cost = client.metadata.get_cost(
 )
 print("cost (US Dollars)", cost)
 
+
 # -- get the ES future with the highest open interest:
 data = client.timeseries.stream(
     dataset="GLBX.MDP3",
