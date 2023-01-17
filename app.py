@@ -4,81 +4,33 @@ from fpdf import FPDF
 import pandas as pd
 import numpy as np
 
-# authenticate
-client = db.Historical(CONSUMER_KEY)
+# read data
+df = pd.read_csv('static/data.csv')
 
-# set attributes
-SYMBOLS = ["ES.n.0"]
-SCHEMA = "ohlcv-1d"
-START = "2022-03-01T00:00" # start date
-END = "2022-05-31T00:10" # end date
+# initialize dictionary of statistics given list of keys
+statkeys = ['close', 'high', 'low', 'return',
+            'one_sd', 'two_sd', 'three_sd', 'historical_vol',
+            'upper_1', 'upper_2', 'upper_3', 'upper_4', 'upper_5',
+            'lower_1', 'lower_2', 'lower_3', 'lower_4', 'lower_5'] 
 
-
-# -- get the record count of the time series data query:
-count = client.metadata.get_record_count(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("count", count)
-
-
-# -- get the billable uncompressed raw binary size: 
-size = client.metadata.get_billable_size(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("billable size (bytes)", size)
-
-
-# -- get cost estimate in US Dollars:
-cost = client.metadata.get_cost(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-print("cost (US Dollars)", cost)
-
-
-# -- get the ES future with the highest open interest:
-data = client.timeseries.stream(
-    dataset="GLBX.MDP3",
-    symbols=SYMBOLS,
-    start=START,
-    end=END,
-    stype_in='smart',
-    schema="ohlcv-1d"
-)
-
-# pretty price and time stamps
-df = data.to_df(pretty_px=True, pretty_ts=True)
-
+# using fromkeys() method
+stats = dict.fromkeys(statkeys, None)
 
 # -- calculate statistics
 # close, high, low
-CLOSE = df.iloc[-1]['close']
-HIGH = round(df['close'].max(), 2)
-LOW = round(df['close'].min(), 2)
+stats['close'] = df.iloc[-1]['close']
+stats['high'] = round(df['close'].max(), 2)
+stats['low'] = round(df['close'].min(), 2)
 
 # percent return over period (3 months)
 # add rounding and formatting
-RETURN = (df.iloc[-1]['close'] - df.iloc[0]['close']) / df.iloc[-1]['close']
+stats['return'] = (df.iloc[-1]['close'] - df.iloc[0]['close']) / df.iloc[-1]['close']
 
 # daily move standard deviations
-ONE_SD = int(df['close'].diff(1).std())
-TWO_SD = int(ONE_SD * 2.)
-THREE_SD = int(ONE_SD * 3.)
-HISTORICAL_VOL = np.sqrt(252) * np.std(df['close'].pct_change(1))
+stats['one_sd'] = int(df['close'].diff(1).std())
+stats['two_sd'] = int(stats['one_sd'] * 2.)
+stats['three_sd'] = int(stats['one_sd'] * 3.)
+stats['historical_vol'] = np.sqrt(252) * np.std(df['close'].pct_change(1))
 
 # 1-5 day expected range
 def expected_range(s, v, dte, y=365):
@@ -89,58 +41,51 @@ def expected_range(s, v, dte, y=365):
     y: trading period (one year) '''
     return s * v * np.sqrt(dte / y)
     
-UPPER_1 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 1)
-UPPER_2 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 2)
-UPPER_3 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 3)
-UPPER_4 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 4)
-UPPER_5 = CLOSE + expected_range(CLOSE, HISTORICAL_VOL, 5)
-LOWER_1 = CLOSE - expected_range(CLOSE, HISTORICAL_VOL, 1)
-LOWER_2 = CLOSE - expected_range(CLOSE, HISTORICAL_VOL, 2)
-LOWER_3 = CLOSE - expected_range(CLOSE, HISTORICAL_VOL, 3)
-LOWER_4 = CLOSE - expected_range(CLOSE, HISTORICAL_VOL, 4)
-LOWER_5 = CLOSE - expected_range(CLOSE, HISTORICAL_VOL, 5)
+stats['upper_1'] = stats['close'] + expected_range(stats['close'], 
+                   stats['historical_vol'], 1)
+stats['upper_2'] = stats['close'] + expected_range(stats['close'], 
+                   stats['historical_vol'], 2)
+stats['upper_3'] = stats['close'] + expected_range(stats['close'], 
+                   stats['historical_vol'], 3)
+stats['upper_4'] = stats['close'] + expected_range(stats['close'], 
+                   stats['historical_vol'], 4)
+stats['upper_5'] = stats['close'] + expected_range(stats['close'], 
+                   stats['historical_vol'], 5)
+stats['lower_1'] = stats['close'] - expected_range(stats['close'], 
+                   stats['historical_vol'], 1)
+stats['lower_2'] = stats['close'] - expected_range(stats['close'], 
+                   stats['historical_vol'], 2)
+stats['lower_3'] = stats['close'] - expected_range(stats['close'], 
+                   stats['historical_vol'], 3)
+stats['lower_4'] = stats['close'] - expected_range(stats['close'], 
+                   stats['historical_vol'], 4)
+stats['lower_5'] = stats['close'] - expected_range(stats['close'], 
+                   stats['historical_vol'], 5)
 
 # print
-# print('close', CLOSE)
-# print('high', HIGH)
-# print('low', LOW)
-# print('return', RETURN)
-# print('one_sd', ONE_SD)
-# print('two_sd', TWO_SD)
-# print('three_sd', THREE_SD)
-# print('historical_vol', HISTORICAL_VOL)
-# print('one day upper range', UPPER_1)
-# print('two day upper range', UPPER_2)
-# print('three day upper range', UPPER_3)
-# print('four day upper range', UPPER_4)
-# print('five day upper range', UPPER_5)
-# print('one day lower range', LOWER_1)
-# print('two day lower range', LOWER_2)
-# print('three day lower range', LOWER_3)
-# print('four day lower range', LOWER_4)
-# print('five day lower range', LOWER_5)
+for k, v in stats.items():
+    print(k, v)
 
+# # -- generate pdf
+# title = SYMBOLS[0]
+# class PDF(FPDF):
+#     def header(self):
+#         # Arial bold 15
+#         self.set_font('Arial', 'B', 15)
+#         # Calculate width of title and position
+#         w = self.get_string_width(title) + 6
+#         self.set_x((210 - w) / 2)
+#         # Colors of frame, background and text
+#         self.set_draw_color(0, 80, 180)
+#         self.set_fill_color(230, 230, 0)
+#         self.set_text_color(220, 50, 50)
+#         # Thickness of frame (1 mm)
+#         self.set_line_width(1)
+#         # Title
+#         self.cell(w, 9, title, 1, 1, 'C', 1)
+#         # Line break
+#         self.ln(10)
 
-# -- generate pdf
-title = SYMBOLS[0]
-class PDF(FPDF):
-    def header(self):
-        # Arial bold 15
-        self.set_font('Arial', 'B', 15)
-        # Calculate width of title and position
-        w = self.get_string_width(title) + 6
-        self.set_x((210 - w) / 2)
-        # Colors of frame, background and text
-        self.set_draw_color(0, 80, 180)
-        self.set_fill_color(230, 230, 0)
-        self.set_text_color(220, 50, 50)
-        # Thickness of frame (1 mm)
-        self.set_line_width(1)
-        # Title
-        self.cell(w, 9, title, 1, 1, 'C', 1)
-        # Line break
-        self.ln(10)
-
-pdf = PDF()
-pdf.set_title(title)
-pdf.output('tuto1.pdf', 'F')
+# pdf = PDF()
+# pdf.set_title(title)
+# pdf.output('tuto1.pdf', 'F')
