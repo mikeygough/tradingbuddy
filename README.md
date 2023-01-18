@@ -61,9 +61,3 @@ To Remove a Virtual Environment:
 #### requirements.txt
 Automagically create a requirements.txt file:
 ```pip3 freeze > requirements.txt```
-
-Start the Flask Server:
-```flask run```
-
-Run the Flask Server in Debug Mode:
-```flask --app app.py --debug run```
