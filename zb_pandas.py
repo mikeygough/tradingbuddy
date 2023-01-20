@@ -8,6 +8,7 @@ from collections import OrderedDict
 
 def expected_range(s, v, dte, y=365):
     ''' compute the expected range over dte days.
+    
     s: stock price
     v: annualized volatility
     dte: days to expiration

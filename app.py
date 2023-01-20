@@ -18,26 +18,36 @@ def main():
     #### za_databento.py ####
     # --------------------
     # note that authentication is done in the function
-    db_download_data(SYMBOLS=["ES.n.0"],
-                SCHEMA="ohlcv-1d",
-                START="2022-03-01T00:00",
-                END="2022-05-31T00:10",
-                FNAME=FNAME)
+
+    # ----- for testing we can turn this off ----- #
+    # db_download_data(SYMBOLS=["ES.n.0"],
+    #             SCHEMA="ohlcv-1d",
+    #             START="2022-03-01T00:00",
+    #             END="2022-05-31T00:10",
+    #             FNAME=FNAME)
+    # ----- for testing we can turn this off ----- #
 
 
-    # zb_pandas.py
+    #### zb_pandas.py ####
     # --------------------
+    # read in data
+    df = pd.read_csv(FNAME)
+
+    # calculate stats
+    stats = calculate_stats(df)
+    
     # create pretty printer
     pp = pprint.PrettyPrinter(depth=4)
+    
     # print
-    pp.pprint(calculate_stats(df=pd.read_csv(FNAME)))
+    pp.pprint(stats)
 
 
-    # zc_matplotlib.py
+    #### zc_matplotlib.py ####
     # --------------------
+    
 
-
-    # zd_fpdf.py
+    #### zd_fpdf.py ####
     # --------------------
 
 

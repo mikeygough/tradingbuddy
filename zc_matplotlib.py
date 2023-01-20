@@ -5,28 +5,46 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
 
-# read data
-df = pd.read_csv('static/data.csv')
 
-# format ts_event
-df['ts_event'] = pd.to_datetime(df['ts_event'])
+def create_plot(df, FNAME):
+    ''' create a time series chart of close prices saved to FNAME. for use in tradingbuddy pdf. uses df generated from za_databento.py
+    
+    df: pandas dataframe generated from za_databento.py.
 
-# create fig, ax
-# by default set in inches...
-# but fpdf is in mm
-fig, ax = plt.subplots(figsize=(3.93701, 1.1811))
+    FNAME: filename to save to. for example, 'static/chart.png'
 
-# plot data
-ax.plot(df['ts_event'], df['close'])
+    '''
 
-# -- STYLE --
-# remove right and top spines
-ax.spines[['right', 'top']].set_visible(False)
+    # create fig, ax
+    # by default set in inches...
+    # but fpdf is in mm
+    fig, ax = plt.subplots(figsize=(3.93701, 1.1811))
 
-# format x axis dates
-date_form = DateFormatter("%m-%d")
-ax.xaxis.set_major_formatter(date_form)
+    # plot data
+    ax.plot(df['ts_event'], df['close'])
 
-plt.savefig('static/chart.png', bbox_inches='tight')
-# plt.show()
+    # -- STYLE --
+    # remove right and top spines
+    ax.spines[['right', 'top']].set_visible(False)
 
+    # format x axis dates
+    date_form = DateFormatter("%m-%d")
+    ax.xaxis.set_major_formatter(date_form)
+
+    plt.savefig(FNAME, bbox_inches='tight')
+    # plt.show()
+
+def main():
+    FNAME = 'static/chart.png'
+
+    # read data
+    df = pd.read_csv('static/data.csv')
+
+    # format ts_event
+    df['ts_event'] = pd.to_datetime(df['ts_event'])
+
+    create_plot(df, FNAME)
+
+
+if __name__ == '__main__':
+    main()
