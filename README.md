@@ -1,6 +1,5 @@
 ### about:
-**finnews** is my final project for [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python).
-going to rebrand as **tradingbuddy**.
+**tradingbuddy** is my final project for [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python).
 
 given list of symbols, download 3 months of historical closes, generate .pdf with...
 
