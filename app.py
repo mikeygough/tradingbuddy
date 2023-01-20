@@ -1,10 +1,16 @@
 from config import *
 import databento as db
-from fpdf import FPDF
-import pandas as pd
-import numpy as np
+import warnings
+warnings.filterwarnings('ignore')
 
-# 1-databento.py
+
+#### 1-databento.py ####
+# --------------------
+# first, authenticate to databento
+client = db.Historical(CONSUMER_KEY)
+
+
+
 
 # 2-pandas.py
 
