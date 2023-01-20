@@ -8,7 +8,8 @@ def db_download_data(SYMBOLS,
                      SCHEMA,
                      START,
                      END,
-                     FNAME):
+                     FNAME,
+                     client=db.Historical(CONSUMER_KEY)):
     '''
     wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading. user must enter 'y' to proceed with download.
     
@@ -21,6 +22,8 @@ def db_download_data(SYMBOLS,
     end: string end date. for example, "2022-05-31T00:10"
 
     fname: string file export name. for example, "static/data.csv". must include .csv.
+
+    client: client object after databento authentication
     '''
 
     # -- get the record count of the time series data query:
@@ -77,13 +80,14 @@ def db_download_data(SYMBOLS,
 
     # pretty price and time stamps
     df = data.to_df(pretty_px=True, pretty_ts=True)
-    df.to_csv('{}'.format(fname))
+    df.to_csv('{}'.format(FNAME))
+
+    print("Saved to {}".format(FNAME))
 
 
 def main():
-    # authenticate
-    client = db.Historical(CONSUMER_KEY)
 
+    # note that authentication is done in the function
     db_download_data(SYMBOLS=["ES.n.0"],
                 SCHEMA="ohlcv-1d",
                 START="2022-03-01T00:00",
