@@ -14,6 +14,8 @@ def create_plot(df, FNAME):
     FNAME: filename to save to. for example, 'static/chart.png'
 
     '''
+    # format ts_event
+    df['ts_event'] = pd.to_datetime(df['ts_event'])
 
     # create fig, ax
     # by default set in inches...
@@ -39,9 +41,6 @@ def main():
 
     # read data
     df = pd.read_csv('static/data.csv')
-
-    # format ts_event
-    df['ts_event'] = pd.to_datetime(df['ts_event'])
 
     create_plot(df, FNAME)
 

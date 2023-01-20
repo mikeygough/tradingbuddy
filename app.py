@@ -5,9 +5,11 @@ import warnings
 warnings.filterwarnings('ignore')
 import pprint
 import pandas as pd
+
 # function imports
 from za_databento import db_download_data
 from zb_pandas import expected_range, calculate_stats
+from zc_matplotlib import create_plot
 
 
 def main():
@@ -45,7 +47,8 @@ def main():
 
     #### zc_matplotlib.py ####
     # --------------------
-    
+    create_plot(df, FNAME='static/chart.png')
+
 
     #### zd_fpdf.py ####
     # --------------------
