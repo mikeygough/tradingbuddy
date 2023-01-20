@@ -3,8 +3,6 @@ import databento as db
 import warnings
 warnings.filterwarnings('ignore')
 
-# authenticate
-client = db.Historical(CONSUMER_KEY)
 
 def db_download_data(SYMBOLS,
                      SCHEMA,
@@ -81,8 +79,17 @@ def db_download_data(SYMBOLS,
     df = data.to_df(pretty_px=True, pretty_ts=True)
     df.to_csv('{}'.format(fname))
 
-db_download_data(SYMBOLS=["ES.n.0"],
+
+def main():
+    # authenticate
+    client = db.Historical(CONSUMER_KEY)
+
+    db_download_data(SYMBOLS=["ES.n.0"],
                 SCHEMA="ohlcv-1d",
                 START="2022-03-01T00:00",
                 END="2022-05-31T00:10",
                 FNAME="static/data.csv")
+
+
+if __name__ == '__main__':
+    main()
