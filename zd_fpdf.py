@@ -2,23 +2,18 @@ from fpdf import FPDF
 import numpy as np
 
 
+# create pdf
 pdf = FPDF(orientation='L')
 pdf.add_page()
-pdf.set_font('Arial', 'B', 16)
+pdf.set_margin(0)
+pdf.set_line_width(0)
 
-# create pdf
-# pdf.set_margin(0)
-
-
+# describe pdf
 print("page layout", pdf.page_layout)
-
 # unit mm
 print("default page dimensions", pdf.default_page_dimensions)
 # (841.89, 595.28)mm
-pdf.set_line_width(0)
 
-# add page
-pdf.add_page()
 
 def draw_circle(xpos, ypos, rad=25, symbol=''):
     '''
@@ -130,7 +125,27 @@ def draw_sd(xpos, ypos):
 
     # standard curve
     pdf.image('static/normal_distribution.png', x=xpos, y=ypos,
-    h=30, w=100)
+              h=30, w=100)
+
+    # add annotations
+    pdf.set_font('Helvetica', 'B', 14)
+    
+    # draw low text
+    # low 1
+    pdf.set_xy(xpos+43 - (pdf.get_string_width('25') / 3),
+               ypos+28)
+    pdf.cell(h=10, txt='25', align='L')
+
+    # low 2
+    pdf.set_xy(xpos+35 - (pdf.get_string_width('35') / 3),
+               ypos+28)
+    pdf.cell(h=10, txt='35', align='L')
+
+    # low 3
+    pdf.set_xy(xpos+25 - (pdf.get_string_width('40') / 3),
+               ypos+28)
+    pdf.cell(h=10, txt='40', align='L')
+    
 
 # draw sd
 draw_sd(xpos=105, ypos=7)
