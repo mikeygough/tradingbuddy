@@ -52,7 +52,15 @@ def main():
 
     #### zd_fpdf.py ####
     # --------------------
+    # create pdf
+    pdf = FPDF(orientation='L')
+    pdf.set_margin(0)
 
+    # add page
+    pdf.add_page()
+
+    # output file
+    pdf.output('static/app.pdf')
 
 
 if __name__ == '__main__':

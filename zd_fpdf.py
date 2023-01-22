@@ -1,9 +1,15 @@
 from fpdf import FPDF
 import numpy as np
 
-# create pdf
+
 pdf = FPDF(orientation='L')
-pdf.set_margin(0)
+pdf.add_page()
+pdf.set_font('Arial', 'B', 16)
+
+# create pdf
+# pdf.set_margin(0)
+
+
 print("page layout", pdf.page_layout)
 
 # unit mm
@@ -268,19 +274,4 @@ pdf.output('static/test-fpdf.pdf')
 #     ln=1)
 
 # pdf.output('2-pandas-fpdf.pdf', 'F')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
