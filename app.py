@@ -10,6 +10,7 @@ import pandas as pd
 from za_databento import db_download_data
 from zb_pandas import expected_range, calculate_stats
 from zc_matplotlib import create_plot
+from test_class import pdf
 
 
 def main():
@@ -52,15 +53,17 @@ def main():
 
     #### zd_fpdf.py ####
     # --------------------
+
+
     # create pdf
-    pdf = FPDF(orientation='L')
-    pdf.set_margin(0)
+    # pdf = FPDF(orientation='L')
+    # pdf.set_margin(0)
 
-    # add page
-    pdf.add_page()
+    # # add page
+    # pdf.add_page()
 
-    # output file
-    pdf.output('static/app.pdf')
+    # # output file
+    # pdf.output('static/app.pdf')
 
 
 if __name__ == '__main__':

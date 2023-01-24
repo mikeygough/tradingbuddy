@@ -6,7 +6,7 @@ import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
 
 
-def create_plot(df, FNAME):
+def create_plot(df, output_name):
     ''' create a time series chart of close prices saved to FNAME. for use in tradingbuddy pdf. uses df generated from za_databento.py
     
     df: pandas dataframe generated from za_databento.py.

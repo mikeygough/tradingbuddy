@@ -15,7 +15,7 @@ print("default page dimensions", pdf.default_page_dimensions)
 # (841.89, 595.28)mm
 
 
-def draw_circle(xpos, ypos, rad=25, symbol=''):
+def draw_circle(xpos, ypos, rad=25, symbol='', pdf=pdf):
     '''
     draws a filled in circle of radius rad as xpos, ypos
     xpos: abscissa of upper-left bounding box
@@ -35,7 +35,7 @@ def draw_circle(xpos, ypos, rad=25, symbol=''):
 
 def draw_hilo(high, low, close,
               xpos_start, ypos_start,
-              xpos_end, ypos_end):
+              xpos_end, ypos_end, pdf=pdf):
     '''
     draws a high-low-close line with circle at the current price
     high: underlying high price
@@ -87,7 +87,7 @@ def draw_hilo(high, low, close,
     # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
     # pdf.cell(h=10, txt='Close', align='C')
 
-def draw_sd(xpos, ypos):
+def draw_sd(xpos, ypos, pdf=pdf):
     '''
     draws a normal distribution with 1, 2 & 3 sd movement values
     '''
