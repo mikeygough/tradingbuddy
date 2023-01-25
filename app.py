@@ -10,7 +10,7 @@ import pandas as pd
 from za_databento import db_download_data
 from zb_pandas import expected_range, calculate_stats
 from zc_matplotlib import create_plot
-from test_class import pdf
+from zd_fpdf import PDF
 
 
 def main():
@@ -53,17 +53,23 @@ def main():
 
     #### zd_fpdf.py ####
     # --------------------
-
-
     # create pdf
-    # pdf = FPDF(orientation='L')
-    # pdf.set_margin(0)
+    pdf = PDF()
 
-    # # add page
-    # pdf.add_page()
+    # first symbol
+    # symbol circle
+    pdf.draw_circle(xpos=10, ypos=10, symbol='/ES')
 
-    # # output file
-    # pdf.output('static/app.pdf')
+    # draw sd
+    pdf.draw_sd(xpos=105, ypos=7, sd=stats['one_sd'])
+
+    # high low close
+    pdf.draw_hilo(high=100, low=10, close=79, 
+              xpos_start=55, ypos_start=22,
+              xpos_end=100, ypos_end=22)
+    
+    # output file
+    pdf.output('static/app.pdf')
 
 
 if __name__ == '__main__':

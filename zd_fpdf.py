@@ -79,9 +79,12 @@ class PDF(FPDF):
         # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
         # pdf.cell(h=10, txt='Close', align='C')
 
-    def draw_sd(self, xpos, ypos):
+    def draw_sd(self, xpos, ypos, sd):
         '''
         draws a normal distribution with 1, 2 & 3 sd movement values
+        xpos: x position
+        ypos: y position
+        sd: float standard deviation.
         '''
         # standard deviation
         # std lines
@@ -123,20 +126,23 @@ class PDF(FPDF):
         self.set_font('Helvetica', 'B', 14)
         
         # draw low text
+        sd_one_len = self.get_string_width(str(int(sd)))
+        sd_two_len = self.get_string_width(str(int(sd * 2.0)))
+        sd_three_len = self.get_string_width(str(int(sd * 3.0)))
         # low 1
-        self.set_xy(xpos+43 - (self.get_string_width('25') / 3),
+        self.set_xy(xpos+43 - (sd_one_len / 3),
                    ypos+28)
-        self.cell(h=10, txt='25', align='L')
+        self.cell(h=10, txt='{}'.format(int(sd)), align='L')
 
         # low 2
-        self.set_xy(xpos+35 - (self.get_string_width('35') / 3),
+        self.set_xy(xpos+35 - (sd_two_len / 3),
                    ypos+28)
-        self.cell(h=10, txt='35', align='L')
+        self.cell(h=10, txt='{}'.format(int(sd * 2.0)), align='L')
 
         # low 3
-        self.set_xy(xpos+25 - (self.get_string_width('40') / 3),
+        self.set_xy(xpos+25 - (sd_three_len / 3),
                    ypos+28)
-        self.cell(h=10, txt='40', align='L')
+        self.cell(h=10, txt='{}'.format(int(sd * 3.0)), align='L')
 
 
 def main():
@@ -150,7 +156,7 @@ def main():
     # (841.89, 595.28)mm
     
     # draw sd
-    pdf.draw_sd(xpos=105, ypos=7)
+    pdf.draw_sd(xpos=105, ypos=7, sd=25)
 
     # symbol circle
     pdf.draw_circle(xpos=10, ypos=10, symbol='/ES')
