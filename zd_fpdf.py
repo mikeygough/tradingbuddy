@@ -1,6 +1,7 @@
 from fpdf import FPDF
 import numpy as np
 
+
 class PDF(FPDF):
     def __init__(self):
         super().__init__(orientation='L')
@@ -8,12 +9,14 @@ class PDF(FPDF):
         self.set_margin(0)
 
 
-    def draw_circle(self, xpos, ypos, rad=25, symbol=''):
+    def draw_circle(self, xpos, ypos, rad=25, symbol='', name=''):
         '''
         draws a filled in circle of radius rad as xpos, ypos
         xpos: abscissa of upper-left bounding box
         ypos: ordinate of upper-left bounding box
         rad: radius of circle, default 25
+        symbol: product symbol
+        name: product name
         '''
         self.set_line_width(1)
         self.set_draw_color(240)
@@ -21,9 +24,13 @@ class PDF(FPDF):
         self.circle(x=xpos, y=ypos, r=rad, style='F')
 
         # add text annotation
-        self.set_font('Helvetica', 'B', 16)
+        self.set_font('Arial', 'B', 16)
         self.set_xy(xpos, ypos)
         self.cell(w=rad, h=rad-2, txt='{}'.format(symbol), align='C')
+
+        self.set_font('Arial', '', 14)
+        self.set_xy(xpos, ypos*2.8)
+        self.cell(w=rad, h=rad-2, txt='{}'.format(name), align='C')
 
 
     def draw_hilo(self, high, low, close,
@@ -57,28 +64,25 @@ class PDF(FPDF):
         self.draw_circle(xpos=circle_x_position, ypos=ypos_start-1.5, rad=3)
 
         # add annotations
-        self.set_font('Helvetica', 'B', 12)
+        self.set_font('Arial', '', 12)
         
         # draw low text
         self.set_xy(xpos_start - self.get_string_width('{}'.format(low)) - 2,
                    ypos_start-8)
-        self.cell(h=10, txt='{}'.format(low), align='L')
+        self.cell(h=10, txt='{:.2f}'.format(low), align='L')
         self.set_xy(xpos_start - self.get_string_width('Low') - 2, ypos_start-2)
         self.cell(h=10, txt='Low', align='L')
 
         # draw high text
         self.set_xy(xpos_end, ypos_end-8)
-        self.cell(h=10, txt='{}'.format(high), align='L')
+        self.cell(h=10, txt='{:.2f}'.format(high), align='L')
         self.set_xy(xpos_end, ypos_end-2)
         self.cell(h=10, txt='High', align='L')
         
         # draw close text
-        self.set_font('Helvetica', 'B', 14)
-
+        self.set_font('Arial', '', 14)
         self.set_xy(circle_x_position - (self.get_string_width('{}'.format(close)) / 2),       ypos_end-12)
-        self.cell(h=10, txt='{}'.format(close), align='C')
-        # pdf.set_xy(circle_x_position - (pdf.get_string_width('Close') / 2), ypos_end-2)
-        # pdf.cell(h=10, txt='Close', align='C')
+        self.cell(h=10, txt='{:.2f}'.format(close), align='C')
 
 
     def draw_sd(self, xpos, ypos, sd):
@@ -94,7 +98,7 @@ class PDF(FPDF):
                   h=30, w=100)
 
         # add annotations
-        self.set_font('Helvetica', 'B', 14)
+        self.set_font('Arial', '', 12)
         
         # draw low text
         sd_one_len = self.get_string_width(str(int(sd)))

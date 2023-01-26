@@ -58,7 +58,7 @@ def main():
 
     # first symbol
     # symbol circle
-    pdf.draw_circle(xpos=10, ypos=10, symbol='/ES')
+    pdf.draw_circle(xpos=10, ypos=10, symbol='/ES', name='Micro S&P')
 
     # draw sd
     pdf.draw_sd(xpos=105, ypos=7, sd=stats['one_sd'])
