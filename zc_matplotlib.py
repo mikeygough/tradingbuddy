@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
+import matplotlib.ticker as mtick
 
 
 def create_plot(df, FNAME):
@@ -20,7 +21,7 @@ def create_plot(df, FNAME):
     # calcualate pct change
     first_close = df.iloc[0]['close']
     # pct change = (new - old) / old
-    df['cumulative_pct_change'] = ((df['close'] - first_close)) / first_close
+    df['cumulative_pct_change'] = ((df['close'] - first_close) / first_close) * 100
 
     # create fig, ax
     # by default set in inches...
@@ -28,7 +29,8 @@ def create_plot(df, FNAME):
     fig, ax = plt.subplots(figsize=(3.93701, 1.1811*1.2))
 
     # plot data
-    ax.plot(df['ts_event'], df['cumulative_pct_change'])
+    ax.axhline(y=0, color='#707070', linestyle='--', alpha=0.5)
+    ax.plot(df['ts_event'], df['cumulative_pct_change'], color='#53a7db')
 
     # -- STYLE --
     # remove right and top spines
@@ -36,6 +38,10 @@ def create_plot(df, FNAME):
 
     # set ticks right side
     ax.yaxis.tick_right()
+    ax.yaxis.set_ticks_position('none') 
+    ax.xaxis.set_ticks_position('none') 
+    # format as percent
+    ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=2))
 
     # format x axis dates
     date_form = DateFormatter("%m-%d")
