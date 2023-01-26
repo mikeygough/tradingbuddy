@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter
+from matplotlib.dates import MonthLocator
 import matplotlib.ticker as mtick
 
 
@@ -26,6 +27,11 @@ def create_plot(df, FNAME):
     # create fig, ax
     # by default set in inches...
     # but fpdf is in mm
+
+    # set font
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams.update({'font.size': 12})
+
     fig, ax = plt.subplots(figsize=(3.93701, 1.1811*1.2))
 
     # plot data
@@ -35,17 +41,23 @@ def create_plot(df, FNAME):
     # -- STYLE --
     # remove right and top spines
     ax.spines[['left', 'top']].set_visible(False)
+    ax.spines[['right', 'bottom']].set_edgecolor('#707070')
 
     # set ticks right side
     ax.yaxis.tick_right()
+    # hide x and y axis tick marks
     ax.yaxis.set_ticks_position('none') 
     ax.xaxis.set_ticks_position('none') 
+    
     # format as percent
-    ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=2))
+    ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=0))
 
     # format x axis dates
-    date_form = DateFormatter("%m-%d")
+    date_form = DateFormatter("%b")
     ax.xaxis.set_major_formatter(date_form)
+    ax.xaxis.set_major_locator(MonthLocator())
+
+
 
     plt.savefig(FNAME, bbox_inches='tight', transparent=True)
     # plt.show()
