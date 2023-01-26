@@ -64,10 +64,14 @@ def main():
     pdf.draw_sd(xpos=105, ypos=7, sd=stats['one_sd'])
 
     # high low close
-    pdf.draw_hilo(high=100, low=10, close=79, 
+    pdf.draw_hilo(high=stats['high'], low=stats['low'], close=stats['close'], 
               xpos_start=55, ypos_start=22,
               xpos_end=100, ypos_end=22)
     
+    # add chart
+    # pdf.image('static/chart.png', x=190, y=8,
+    # h=30, w=100)
+
     # output file
     pdf.output('static/app.pdf')
 
