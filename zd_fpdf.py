@@ -29,7 +29,7 @@ class PDF(FPDF):
         self.cell(w=rad, h=rad-2, txt='{}'.format(symbol), align='C')
 
         self.set_font('Arial', '', 14)
-        self.set_xy(xpos, ypos*2.8)
+        self.set_xy(xpos, ypos*2.85)
         self.cell(w=rad, h=rad-2, txt='{}'.format(name), align='C')
 
 
