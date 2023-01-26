@@ -17,7 +17,7 @@ class PDF(FPDF):
         '''
         self.set_line_width(1)
         self.set_draw_color(240)
-        self.set_fill_color(r=230, g=30, b=180)
+        self.set_fill_color(r=83, g=167, b=219)
         self.circle(x=xpos, y=ypos, r=rad, style='F')
 
         # add text annotation
@@ -40,7 +40,7 @@ class PDF(FPDF):
         '''
         # draw line
         self.set_line_width(1)
-        self.set_draw_color(r=230, g=30, b=180)
+        self.set_draw_color(r=112, g=112, b=112)
         self.line(x1=xpos_start, y1=ypos_start,
                  x2=xpos_end, y2=ypos_end)
 
