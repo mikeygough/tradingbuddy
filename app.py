@@ -69,8 +69,8 @@ def main():
               xpos_end=100, ypos_end=22)
     
     # add chart
-    # pdf.image('static/chart.png', x=190, y=8,
-    # h=30, w=100)
+    pdf.image('static/chart.png', x=208, y=9,
+    h=35, w=85)
 
     # output file
     pdf.output('static/app.pdf')

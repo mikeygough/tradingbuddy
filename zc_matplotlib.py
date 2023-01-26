@@ -20,20 +20,23 @@ def create_plot(df, FNAME):
     # create fig, ax
     # by default set in inches...
     # but fpdf is in mm
-    fig, ax = plt.subplots(figsize=(3.93701, 1.1811))
+    fig, ax = plt.subplots(figsize=(3.93701, 1.1811*1.2))
 
     # plot data
     ax.plot(df['ts_event'], df['close'])
 
     # -- STYLE --
     # remove right and top spines
-    ax.spines[['right', 'top']].set_visible(False)
+    ax.spines[['left', 'top']].set_visible(False)
+
+    # set ticks right side
+    ax.yaxis.tick_right()
 
     # format x axis dates
     date_form = DateFormatter("%m-%d")
     ax.xaxis.set_major_formatter(date_form)
 
-    plt.savefig(FNAME, bbox_inches='tight')
+    plt.savefig(FNAME, bbox_inches='tight', transparent=True)
     # plt.show()
 
 def main():
