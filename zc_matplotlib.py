@@ -57,8 +57,6 @@ def create_plot(df, FNAME):
     ax.xaxis.set_major_formatter(date_form)
     ax.xaxis.set_major_locator(MonthLocator())
 
-
-
     plt.savefig(FNAME, bbox_inches='tight', transparent=True)
     # plt.show()
 

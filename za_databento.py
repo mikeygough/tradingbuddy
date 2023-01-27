@@ -10,7 +10,8 @@ def db_download_data(SYMBOLS,
                      START,
                      END,
                      FNAME,
-                     client=db.Historical(CONSUMER_KEY)):
+                     client=db.Historical(CONSUMER_KEY),
+                     safety=True):
     '''
     wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading. user must enter 'y' to proceed with download.
     
@@ -72,12 +73,13 @@ def db_download_data(SYMBOLS,
         schema=SCHEMA
     )
 
-    if input("Proceed with the download? (y/n): ") != 'y':
-        print("Aborting download...")
-        exit()
-    else:
-        print("Proceeding with download...")
-        pass
+    if safety:
+        if input("Proceed with the download? (y/n): ") != 'y':
+            print("Aborting download...")
+            exit()
+        else:
+            print("Proceeding with download...")
+            pass
 
     # pretty price and time stamps
     df = data.to_df(pretty_px=True, pretty_ts=True)
