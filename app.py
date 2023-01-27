@@ -27,12 +27,12 @@ def main():
         fname = 'static/{}.csv'.format(symbol)
         # download data
         # ----- for testing we can turn this off ----- #
-        db_download_data(SYMBOLS=[symbols[symbol]],
-                SCHEMA='ohlcv-1d',
-                START='2022-03-01T00:00',
-                END='2022-05-31T00:10',
-                FNAME=fname,
-                safety=False)
+        # db_download_data(SYMBOLS=[symbols[symbol]],
+        #         SCHEMA='ohlcv-1d',
+        #         START='2022-03-01T00:00',
+        #         END='2022-05-31T00:10',
+        #         FNAME=fname,
+        #         safety=False)
         # read in data
         df = pd.read_csv(fname)
         # calculate stats
@@ -44,9 +44,15 @@ def main():
 
     # create pdf
     pdf = PDF()
+    # prevent auto page break
+    pdf.set_auto_page_break(auto=False)
+    # set initial start positions
     xpos_start = 10
     ypos_start = 10
+    # write to pdf
     for stats in all_stats:
+        print('xpos_start', xpos_start)
+        print('ypos_start', ypos_start)
         # symbol circle
         pdf.draw_circle(xpos=xpos_start, ypos=ypos_start, symbol='{}'.format(stats), 
             name='')
@@ -58,8 +64,8 @@ def main():
         pdf.draw_hilo(high=all_stats[stats]['high'], 
                       low=all_stats[stats]['low'], 
                       close=all_stats[stats]['close'], 
-                      xpos_start=xpos_start+45, ypos_start=ypos_start+12,
-                      xpos_end=xpos_start+90, ypos_end=ypos_start+12)
+                      x_start=xpos_start+45, y_start=ypos_start+12,
+                      x_end=xpos_start+90, y_end=ypos_start+12)
     
         # add chart
         pdf.image('static/{}_chart.png'.format(stats), 

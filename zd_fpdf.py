@@ -34,54 +34,54 @@ class PDF(FPDF):
 
 
     def draw_hilo(self, high, low, close,
-              xpos_start, ypos_start,
-              xpos_end, ypos_end):
+              x_start, y_start,
+              x_end, y_end):
         '''
         draws a high-low-close line with circle at the current price
         high: underlying high price
         low: underlying low price
-        xpos_start: abscissa of first point
-        ypos_start: ordinate of first point
-        xpos_end: abscissa of second point
-        ypos_end: ordinate of second point
+        x_start: abscissa of first point
+        y_start: ordinate of first point
+        x_end: abscissa of second point
+        y_end: ordinate of second point
         '''
         # draw line
         self.set_line_width(1)
         self.set_draw_color(r=112, g=112, b=112)
-        self.line(x1=xpos_start, y1=ypos_start,
-                 x2=xpos_end, y2=ypos_end)
+        self.line(x1=x_start, y1=y_start,
+                 x2=x_end, y2=y_end)
 
         # calculate line length
-        length = np.sqrt((xpos_end - xpos_start) ** 2 + (ypos_end - ypos_start) ** 2)
+        length = np.sqrt((x_end - x_start) ** 2 + (y_end - y_start) ** 2)
         # calculate position percent
         close_pct = close / high
         # calculate additional line pos
         additional_pos = close_pct * length
         # calculate circle position
-        circle_x_position = additional_pos + xpos_start
+        circle_x_position = additional_pos + x_start
 
         # draw circle at position
-        self.draw_circle(xpos=circle_x_position, ypos=ypos_start-1.5, rad=3)
+        self.draw_circle(xpos=circle_x_position, ypos=y_start-1.5, rad=3)
 
         # add annotations
         self.set_font('Arial', '', 12)
         
         # draw low text
-        self.set_xy(xpos_start - self.get_string_width('{}'.format(low)) - 2,
-                   ypos_start-8)
+        self.set_xy(x_start - self.get_string_width('{}'.format(low)) - 2,
+                   y_start-8)
         self.cell(h=10, txt='{:.2f}'.format(low), align='L')
-        self.set_xy(xpos_start - self.get_string_width('Low') - 2, ypos_start-2)
+        self.set_xy(x_start - self.get_string_width('Low') - 2, y_start-2)
         self.cell(h=10, txt='Low', align='L')
 
         # draw high text
-        self.set_xy(xpos_end, ypos_end-8)
+        self.set_xy(x_end, y_end-8)
         self.cell(h=10, txt='{:.2f}'.format(high), align='L')
-        self.set_xy(xpos_end, ypos_end-2)
+        self.set_xy(x_end, y_end-2)
         self.cell(h=10, txt='High', align='L')
         
         # draw close text
         self.set_font('Arial', '', 14)
-        self.set_xy(circle_x_position - (self.get_string_width('{}'.format(close)) / 2),       ypos_end-12)
+        self.set_xy(circle_x_position - (self.get_string_width('{}'.format(close)) / 2),       y_end-12)
         self.cell(h=10, txt='{:.2f}'.format(close), align='C')
 
 
@@ -148,8 +148,8 @@ def main():
 
     # high low close
     pdf.draw_hilo(high=100, low=10, close=79, 
-              xpos_start=55, ypos_start=22,
-              xpos_end=100, ypos_end=22)
+              x_start=55, y_start=22,
+              x_end=100, y_end=22)
 
     # sample chart
     pdf.image('static/chart.png', x=190, y=8,
