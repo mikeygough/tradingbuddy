@@ -46,9 +46,16 @@ def main():
     pdf = PDF()
     # prevent auto page break
     pdf.set_auto_page_break(auto=False)
+    # style headers and footers
+    pdf.set_font("helvetica", "I", 8)
+    pdf.set_y(-10)
+    pdf.cell(0, 10, 'All statistics measure the last three months of data unless otherwise stated. © The information in this advertisement is current as of the date noted, is for informational purposes only, and does not contend to address the financial objectives, situation, or specific needs of any individual investor. Trading futures involves the risk of loss, including the possibility of loss greater than your initial investment.', align='C')
+
+
+
     # set initial start positions
     xpos_start = 10
-    ypos_start = 10
+    ypos_start = 30
     # write to pdf
     for stats in all_stats:
         # draw symbol circle
