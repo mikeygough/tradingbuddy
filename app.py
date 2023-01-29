@@ -51,16 +51,14 @@ def main():
     ypos_start = 10
     # write to pdf
     for stats in all_stats:
-        print('xpos_start', xpos_start)
-        print('ypos_start', ypos_start)
-        # symbol circle
+        # draw symbol circle
         pdf.draw_circle(xpos=xpos_start, ypos=ypos_start, symbol='{}'.format(stats), 
             name='')
 
         # draw sd
         pdf.draw_sd(xpos=xpos_start+95, ypos=ypos_start-3, sd=all_stats[stats]['one_sd'])
 
-        # high low close
+        # draw high low close
         pdf.draw_hilo(high=all_stats[stats]['high'], 
                       low=all_stats[stats]['low'], 
                       close=all_stats[stats]['close'], 
@@ -75,67 +73,6 @@ def main():
 
     # output file
     pdf.output('static/app.pdf')
-    
-
-    # # set file name
-    # FNAME = 'static/data.csv'
-
-    # #### za_databento.py ####
-    # # --------------------
-    # # note that authentication is done in the function
-
-    # # ----- for testing we can turn this off ----- #
-    # db_download_data(SYMBOLS=['ES.n.0'],
-    #             SCHEMA='ohlcv-1d',
-    #             START='2022-03-01T00:00',
-    #             END='2022-05-31T00:10',
-    #             FNAME=FNAME)
-    # # ----- for testing we can turn this off ----- #
-
-
-    # #### zb_pandas.py ####
-    # # --------------------
-    # # read in data
-    # df = pd.read_csv(FNAME)
-
-    # # calculate stats
-    # stats = calculate_stats(df)
-    
-    # # create pretty printer
-    # pp = pprint.PrettyPrinter(depth=4)
-    
-    # # print
-    # pp.pprint(stats)
-
-
-    # #### zc_matplotlib.py ####
-    # # --------------------
-    # create_plot(df, FNAME='static/chart.png')
-
-
-    #### zd_fpdf.py ####
-    # --------------------
-    # # create pdf
-    # pdf = PDF()
-
-    # # first symbol
-    # # symbol circle
-    # pdf.draw_circle(xpos=10, ypos=10, symbol='/ES', name='Micro S&P')
-
-    # # draw sd
-    # pdf.draw_sd(xpos=105, ypos=7, sd=stats['one_sd'])
-
-    # # high low close
-    # pdf.draw_hilo(high=stats['high'], low=stats['low'], close=stats['close'], 
-    #           xpos_start=55, ypos_start=22,
-    #           xpos_end=100, ypos_end=22)
-    
-    # # add chart
-    # pdf.image('static/chart.png', x=208, y=9,
-    # h=35, w=85)
-
-    # # output file
-    # pdf.output('static/app.pdf')
 
 
 if __name__ == '__main__':

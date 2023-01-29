@@ -133,7 +133,6 @@ class PDF(FPDF):
 def main():
     # create pdf
     pdf = PDF()
-    
     # describe pdf
     print("page layout", pdf.page_layout)
     # unit mm
