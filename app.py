@@ -47,12 +47,19 @@ def main():
     # prevent auto page break
     pdf.set_auto_page_break(auto=False)
     # add header
-
+    pdf.set_font('Arial', 'B', 22)
+    pdf.set_xy(8, 5)
+    pdf.cell(30, 10, 'Trading Buddy', align='L')
+    # add subheader
+    pdf.set_font('Arial', 'I', 18)
+    pdf.set_text_color(r=112, g=112, b=112)
+    pdf.set_xy(8, 15)
+    pdf.cell(30, 10, 'Equity Markets', align='L')
     # add footer
-    pdf.set_font("Arial", "I", 6)
+    pdf.set_font('Arial', 'I', 6)
     pdf.set_y(-10)
     pdf.multi_cell(0, txt='*All statistics measure the last three months of data unless otherwise stated.\n© The information in this advertisement is current as of the date noted, is for informational purposes only, and does not contend to address the financial objectives, situation, or specific needs of any individual investor.Trading futures involves the risk of loss, including the possibility of loss greater than your initial investment.', align='L')
-
+    pdf.set_text_color(r=0, g=0, b=0)
 
 
     # set initial start positions
