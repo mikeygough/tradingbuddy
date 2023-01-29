@@ -71,7 +71,7 @@ def main():
         pdf.image('static/{}_chart.png'.format(stats), 
                   x=xpos_start+198, y=ypos_start-1, h=35, w=85)
 
-        ypos_start += 50
+        ypos_start += 45
 
     # output file
     pdf.output('static/app.pdf')

@@ -23,22 +23,19 @@ broken up into five main asset classes
 
 #### currently supports:
 * data download from databento
-* statistical calculations
-* preliminary, hard-coded .pdf generation
+* statistical calculations via pandas
+* plot generation with matplotlib
+* pdf writing using fpdf2
 
 #### in development:
-1. databento data pulls
-    * product_id is set by the publisher? [can be matched](https://bit.ly/3jTtQsB)
-2. pandas statistcal analysis
-    * roll these into class attributes
-3. matplotlib / plotly visualizations
-4. pyfpdf report generation
-5. ... aws pdf hosting & mailchimp automations?
+1. pdf styling
+2. ... aws pdf hosting & mailchimp automations?
 
 #### notes:
 * [databento docs](https://docs.databento.com/)
 * [databento python wrapper](https://bit.ly/3Iu88pi)
 * [databento smart symbology](https://bit.ly/3ilxrza)
+* [fpdf2 docs](https://pyfpdf.github.io/fpdf2/index.html)
 
 ***
 ### reference:
