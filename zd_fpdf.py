@@ -66,20 +66,20 @@ class PDF(FPDF):
         # draw low text
         self.set_xy(x_start - self.get_string_width('{}'.format(low)) - 2,
                    y_start-8)
-        self.cell(h=10, txt='{:.2f}'.format(low), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(low), align='L')
         self.set_xy(x_start - self.get_string_width('Low') - 2, y_start-2)
         self.cell(h=10, txt='Low', align='L')
 
         # draw high text
         self.set_xy(x_end, y_end-8)
-        self.cell(h=10, txt='{:.2f}'.format(high), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(high), align='L')
         self.set_xy(x_end, y_end-2)
         self.cell(h=10, txt='High', align='L')
         
         # draw close text
         self.set_font('Arial', '', 14)
         self.set_xy(circle_x_position - (self.get_string_width('{}'.format(close)) / 2),       y_end-12)
-        self.cell(h=10, txt='{:.2f}'.format(close), align='C')
+        self.cell(h=10, txt='{:,.0f}'.format(close), align='C')
 
 
     def draw_sd(self, xpos, ypos, sd):
@@ -104,27 +104,27 @@ class PDF(FPDF):
         
         # low 3
         self.set_xy(xpos*1.05, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd * 3.0)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd * 3.0)), align='L')
 
         # low 2
         self.set_xy(xpos*1.19, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd * 2.0)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd * 2.0)), align='L')
 
         # low 1
         self.set_xy(xpos*1.35, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd)), align='L')
 
         # high 1
         self.set_xy(xpos*1.53, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd)), align='L')
 
         # high 2
         self.set_xy(xpos*1.66, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd * 2.0)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd * 2.0)), align='L')
 
         # high 3
         self.set_xy(xpos*1.80, ypos+28)
-        self.cell(h=10, txt='{}'.format(int(sd * 3.0)), align='L')
+        self.cell(h=10, txt='{:,.0f}'.format(int(sd * 3.0)), align='L')
 
 
 def main():

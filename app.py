@@ -63,7 +63,6 @@ def main():
     pdf.multi_cell(275, txt='*All statistics measure the last three months of data unless otherwise stated.\n© The information in this advertisement is current as of the date noted, is for informational purposes only, and does not contend to address the financial objectives, situation, or specific needs of any individual investor.Trading futures involves the risk of loss, including the possibility of loss greater than your initial investment.', align='L')
     pdf.set_text_color(r=0, g=0, b=0)
 
-
     # set initial start positions
     xpos_start = 10
     ypos_start = 30

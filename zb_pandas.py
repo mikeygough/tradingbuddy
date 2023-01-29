@@ -28,8 +28,8 @@ def calculate_stats(df):
     # -- calculate statistics and add to dict
     # close, high, low
     stats['close'] = df.iloc[-1]['close']
-    stats['high'] = round(df['close'].max(), 2)
-    stats['low'] = round(df['close'].min(), 2)
+    stats['high'] = round(df['close'].max(), 0)
+    stats['low'] = round(df['close'].min(), 0)
 
     # percent return over period (3 months)
     # add rounding and formatting
