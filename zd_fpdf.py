@@ -51,16 +51,13 @@ class PDF(FPDF):
         self.line(x1=x_start, y1=y_start,
                  x2=x_end, y2=y_end)
 
-        # calculate line length
-        length = np.sqrt((x_end - x_start) ** 2 + (y_end - y_start) ** 2)
-        # calculate position percent
-        close_pct = close / high
-        # calculate additional line pos
-        additional_pos = close_pct * length
-        # calculate circle position
-        circle_x_position = additional_pos + x_start
+        # calculate close position
+        length = x_end - x_start
+        high_low = high - low
+        close_low = close - low
+        circle_x_position = x_start + ((close_low / high_low) * length)
 
-        # draw circle at position
+        # draw circle at close position
         self.draw_circle(xpos=circle_x_position, ypos=y_start-1.5, rad=3)
 
         # add annotations
