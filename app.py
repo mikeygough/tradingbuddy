@@ -30,10 +30,11 @@ def main():
         # ----- for testing we can turn this off ----- #
         # db_download_data(SYMBOLS=[symbols[symbol]],
         #         SCHEMA='ohlcv-1d',
-        #         START='2022-03-01T00:00',
-        #         END='2022-05-31T00:10',
+        #         START='2022-10-29T00:00',
+        #         END='2023-01-29T00:10',
         #         FNAME=fname,
         #         safety=False)
+        # ----- for testing we can turn this off ----- #
         # read in data
         df = pd.read_csv(fname)
         # calculate stats

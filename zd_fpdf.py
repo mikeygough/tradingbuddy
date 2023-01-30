@@ -64,7 +64,7 @@ class PDF(FPDF):
         self.set_font('Arial', '', 12)
         
         # draw low text
-        self.set_xy(x_start - self.get_string_width('{}'.format(low)) - 2,
+        self.set_xy(x_start - self.get_string_width('{:,.0f}'.format(low)) - 2,
                    y_start-8)
         self.cell(h=10, txt='{:,.0f}'.format(low), align='L')
         self.set_xy(x_start - self.get_string_width('Low') - 2, y_start-2)
@@ -78,7 +78,7 @@ class PDF(FPDF):
         
         # draw close text
         self.set_font('Arial', '', 14)
-        self.set_xy(circle_x_position - (self.get_string_width('{}'.format(close)) / 2),       y_end-12)
+        self.set_xy(circle_x_position - (self.get_string_width('{:,.0f}'.format(close)) / 2),       y_end-12)
         self.cell(h=10, txt='{:,.0f}'.format(close), align='C')
 
 
