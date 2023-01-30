@@ -5,6 +5,7 @@ import warnings
 warnings.filterwarnings('ignore')
 import pprint
 import pandas as pd
+from datetime import date
 
 # function imports
 from za_databento import db_download_data
@@ -51,6 +52,12 @@ def main():
     pdf.set_font('Arial', 'B', 22)
     pdf.set_xy(8, 5)
     pdf.cell(30, 10, 'Trading Buddy', align='L')
+
+    # add date
+    pdf.set_font('Arial', '', 12)
+    pdf.set_xy(-40, 5)
+    pdf.cell(30, 10, '{}'.format(date.today().strftime('%B %d, %Y')), align='L')
+    
     # add subheader
     pdf.set_font('Arial', 'I', 18)
     pdf.set_text_color(r=112, g=112, b=112)
