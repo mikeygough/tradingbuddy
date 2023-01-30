@@ -64,7 +64,7 @@ def main():
     pdf.set_text_color(r=112, g=112, b=112)
     pdf.set_xy(8, 15)
     pdf.cell(30, 10, 'Equity Markets', align='L')
-    
+
     # add footer
     pdf.set_font('Arial', 'I', 6)
     pdf.set_xy(8, -10)
@@ -73,7 +73,7 @@ def main():
 
     # set initial start positions
     xpos_start = 10
-    ypos_start = 30
+    ypos_start = 40
     # write to pdf
     for stats in all_stats:
         # draw symbol circle
@@ -94,7 +94,19 @@ def main():
         pdf.image('static/{}_chart.png'.format(stats), 
                   x=xpos_start+198, y=ypos_start-1, h=35, w=85)
 
-        ypos_start += 45
+        ypos_start += 40
+
+    # add content explainers
+    pdf.set_font('Arial', 'I', 10)
+    pdf.set_xy(50, 28)
+    pdf.multi_cell(60, txt='Current prices relative to recent highs and lows*',
+             align='C')
+
+    pdf.set_xy(125, 28)
+    pdf.multi_cell(60, txt='Probability of daily net change inside these ranges', align='C')
+
+    pdf.set_xy(215, 28)
+    pdf.multi_cell(60, txt='Percentage path taken to current overall return', align='C')
 
     # output file
     pdf.output('static/app.pdf')
