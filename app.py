@@ -28,12 +28,11 @@ def main():
         fname = 'static/{}.csv'.format(symbol)
         # download data
         # ----- for testing we can turn this off ----- #
-        # db_download_data(SYMBOLS=[symbols[symbol]],
-        #         SCHEMA='ohlcv-1d',
-        #         START='2022-10-29T00:00',
-        #         END='2023-01-29T00:10',
-        #         FNAME=fname,
-        #         safety=False)
+        db_download_data(SYMBOLS=[symbols[symbol]],
+                SCHEMA='ohlcv-1d',
+                START='2022-10-29T00:00',
+                END='2023-01-29T00:10',
+                safety=False).to_csv(fname)
         # ----- for testing we can turn this off ----- #
         # read in data
         df = pd.read_csv(fname)

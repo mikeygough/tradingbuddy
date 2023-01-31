@@ -40,6 +40,7 @@ broken up into five main asset classes
 ***
 ### reference:
 
+
 #### virtual environments
 Create a Python3 Virtual Environment: 
 ```python3 -m venv env```
@@ -53,7 +54,11 @@ Deactivate the Virtual Environment:
 To Remove a Virtual Environment:
 ```sudo em -rf venv```
 
-***
+
 #### requirements.txt
 Automagically create a requirements.txt file:
 ```pip3 freeze > requirements.txt```
+
+
+#### pytest
+```python3 -m pytest```

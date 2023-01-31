@@ -9,11 +9,10 @@ def db_download_data(SYMBOLS,
                      SCHEMA,
                      START,
                      END,
-                     FNAME,
                      client=db.Historical(CONSUMER_KEY),
                      safety=True):
     '''
-    wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading. user must enter 'y' to proceed with download.
+    wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading.
     
     symbols: list of symbols in smart format. for example, ["ES.n.0", "NQ.n.0"] returns the future for each root with the highest open interest
     
@@ -23,9 +22,9 @@ def db_download_data(SYMBOLS,
 
     end: string end date. for example, "2022-05-31T00:10"
 
-    fname: string file export name. for example, "static/data.csv". must include .csv.
-
     client: client object after databento authentication
+
+    safety: boolean, when True prompts the user to enter 'y' to proceed with the data download.
     '''
 
     # -- get the record count of the time series data query:
@@ -83,19 +82,26 @@ def db_download_data(SYMBOLS,
 
     # pretty price and time stamps
     df = data.to_df(pretty_px=True, pretty_ts=True)
-    df.to_csv('{}'.format(FNAME))
-
-    print("Saved to {}".format(FNAME))
+    return df
 
 
 def main():
 
     # note that authentication is done in the function
-    db_download_data(SYMBOLS=["ES.n.0"],
+    df = db_download_data(SYMBOLS=["ES.n.0"],
                 SCHEMA="ohlcv-1d",
                 START="2022-03-01T00:00",
-                END="2022-05-31T00:10",
-                FNAME="static/data.csv")
+                END="2022-05-31T00:10")
+
+    print(df.head(5))
+
+    print(df.shape)
+
+    print(type(df))
+
+    print(df.index.min())
+
+    print(df.index.max())
 
 
 if __name__ == '__main__':
