@@ -28,8 +28,9 @@ broken up into five main asset classes
 * pdf writing using fpdf2
 
 #### in development:
-1. pdf styling
+1. additional pages for more asset classes
 2. ... aws pdf hosting & mailchimp automations?
+3. _always styling_
 
 #### notes:
 * [databento docs](https://docs.databento.com/)
@@ -39,7 +40,6 @@ broken up into five main asset classes
 
 ***
 ### reference:
-
 
 #### virtual environments
 Create a Python3 Virtual Environment: 
@@ -54,11 +54,9 @@ Deactivate the Virtual Environment:
 To Remove a Virtual Environment:
 ```sudo em -rf venv```
 
-
 #### requirements.txt
 Automagically create a requirements.txt file:
 ```pip3 freeze > requirements.txt```
-
 
 #### pytest
 ```python3 -m pytest```

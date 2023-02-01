@@ -93,16 +93,6 @@ def main():
                 START="2022-03-01T00:00",
                 END="2022-05-31T00:10")
 
-    print(df.head(5))
-
-    print(df.shape)
-
-    print(type(df))
-
-    print(df.index.min())
-
-    print(df.index.max())
-
 
 if __name__ == '__main__':
     main()

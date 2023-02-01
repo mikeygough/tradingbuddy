@@ -58,14 +58,14 @@ def create_plot(df):
     ax.xaxis.set_major_locator(MonthLocator())
 
     return plt
-    # plt.savefig(FNAME, bbox_inches='tight', transparent=True)
-    # plt.show()
+
 
 def main():
     # read data
     df = pd.read_csv('static/MES.csv')
 
-    create_plot(df).savefig('static/test_chart.png', bbox_inches='tight', transparent=True)
+    create_plot(df)
+    # .savefig('static/test_chart.png', bbox_inches='tight', transparent=True)
 
 
 if __name__ == '__main__':

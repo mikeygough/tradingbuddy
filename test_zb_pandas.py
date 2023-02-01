@@ -1,9 +1,9 @@
 from zb_pandas import expected_range, calculate_stats
 import pandas as pd
 
-
 # read test data
 df = pd.read_csv('static/MES.csv')
+
 
 def test_calculate_stats_keys():
     stats_dict = calculate_stats(df)
