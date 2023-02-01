@@ -7,17 +7,20 @@ from collections import OrderedDict
 
 
 def expected_range(s, v, dte, y=365):
-    ''' compute the expected range over dte days.
+    ''' 
+    compute the expected range over dte days.
     
-    s: stock price
-    v: annualized volatility
-    dte: days to expiration
-    y: trading period (one year) '''
+    s: stock price. for example, 1915.50
+    v: annualized volatility. for example, 0.22 (22%)
+    dte: days to expiration. for example, 1 will give the one day expected move.
+    y: trading period (one year). for example, 365. 
+    '''
+
     return s * v * np.sqrt(dte / y)
 
 def calculate_stats(df):
     '''
-    given a dataframe from 1-databento.py, return a dictionary of stats including: close, high, low, % return, one_sd, two_sd, three_sd, % historical_vol, upper_1, upper_2, upper_3, upper_4, upper_5, lower_1, lower_2, lower_3, lower_4 and lower_5.
+    given a dataframe from za_databento.py, return a dictionary of calculated statistics including: close, high, low, % return, one_sd, two_sd, three_sd, % historical_vol, upper_1, upper_2, upper_3, upper_4, upper_5, lower_1, lower_2, lower_3, lower_4 and lower_5.
     
     dataframe: df of data. for example, df.
     '''
@@ -65,12 +68,11 @@ def calculate_stats(df):
 
     return stats
 
+
 def main():
-    # set file name
-    FNAME = 'static/data.csv'
     # pretty print
     pp = pprint.PrettyPrinter(depth=4)
-    pp.pprint(calculate_stats(df=pd.read_csv(FNAME)))
+    pp.pprint(calculate_stats(df=pd.read_csv('static/MES.csv')))
 
 
 if __name__ == '__main__':

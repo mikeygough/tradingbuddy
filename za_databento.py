@@ -12,9 +12,9 @@ def db_download_data(SYMBOLS,
                      client=db.Historical(CONSUMER_KEY),
                      safety=True):
     '''
-    wrapper for databento data download. exports the downloaded data to fname. prints the record count, billable size (bytes) and cost in US Dollars before downloading.
+    wrapper for databento data download. returns a dataframe. prints the record count, billable size (bytes) and cost in US Dollars before downloading. if safety is on, prompts for user input before proceeding with the download.
     
-    symbols: list of symbols in smart format. for example, ["ES.n.0", "NQ.n.0"] returns the future for each root with the highest open interest
+    symbols: list of symbols in databento's smart format. for example, ["ES.n.0", "NQ.n.0"] returns the future for each root with the highest open interest
     
     schema: string of data schema. for example "ohlcv-1d"  # open, high, low, close, volume in daily increments
 
@@ -92,6 +92,8 @@ def main():
                 SCHEMA="ohlcv-1d",
                 START="2022-03-01T00:00",
                 END="2022-05-31T00:10")
+
+    print(df.head)
 
 
 if __name__ == '__main__':

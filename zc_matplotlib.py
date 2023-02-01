@@ -9,11 +9,10 @@ import matplotlib.ticker as mtick
 
 
 def create_plot(df):
-    ''' create a time series chart of close prices saved to FNAME. for use in tradingbuddy pdf. uses df generated from za_databento.py
+    '''
+    create a time series chart of percent return. uses df generated from za_databento.py for use in the tradingbuddy pdf.
     
     df: pandas dataframe generated from za_databento.py.
-
-    FNAME: filename to save to. for example, 'static/chart.png'
 
     '''
     # format ts_event
@@ -24,14 +23,13 @@ def create_plot(df):
     # pct change = (new - old) / old
     df['cumulative_pct_change'] = ((df['close'] - first_close) / first_close) * 100
 
-    # create fig, ax
-    # by default set in inches...
-    # but fpdf is in mm
-
     # set font
     plt.rcParams['font.family'] = 'Arial'
     plt.rcParams.update({'font.size': 12})
 
+    # create fig, ax
+    # by default set in inches...
+    # but fpdf is in mm
     fig, ax = plt.subplots(figsize=(3.93701, 1.1811*1.2))
 
     # plot data
@@ -65,7 +63,6 @@ def main():
     df = pd.read_csv('static/MES.csv')
 
     create_plot(df)
-    # .savefig('static/test_chart.png', bbox_inches='tight', transparent=True)
 
 
 if __name__ == '__main__':

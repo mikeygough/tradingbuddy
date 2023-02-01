@@ -11,13 +11,15 @@ class PDF(FPDF):
 
     def draw_circle(self, xpos, ypos, rad=25, symbol='', name=''):
         '''
-        draws a filled in circle of radius rad as xpos, ypos
+        draws a filled circle of radius rad at xpos, ypos
         xpos: abscissa of upper-left bounding box
         ypos: ordinate of upper-left bounding box
-        rad: radius of circle, default 25
-        symbol: product symbol
-        name: product name
+        rad: radius of circle. for example, 25
+        symbol: product symbol. for example '/MES'
+        name: product name. for example, 'Micro S&P'
         '''
+
+        # draw circle
         self.set_line_width(1)
         self.set_draw_color(240)
         self.set_fill_color(r=83, g=167, b=219)
@@ -37,7 +39,7 @@ class PDF(FPDF):
               x_start, y_start,
               x_end, y_end):
         '''
-        draws a high-low-close line with circle at the current price
+        draws a high-low-close line with circle at the most recent close price
         high: underlying high price
         low: underlying low price
         x_start: abscissa of first point
@@ -45,6 +47,7 @@ class PDF(FPDF):
         x_end: abscissa of second point
         y_end: ordinate of second point
         '''
+        
         # draw line
         self.set_line_width(1)
         self.set_draw_color(r=112, g=112, b=112)
@@ -84,20 +87,20 @@ class PDF(FPDF):
 
     def draw_sd(self, xpos, ypos, sd):
         '''
-        draws a normal distribution with 1, 2 & 3 sd movement values
+        plots a normal distribution with one, two and three standard deviation movement values.
         xpos: x position
         ypos: y position
-        sd: float standard deviation.
+        sd: float standard deviation value
         '''
 
-        # standard curve
+        # plot the standard curve
         self.image('static/distribution.png', x=xpos, y=ypos,
                   h=30, w=100)
 
         # add annotations
         self.set_font('Arial', '', 12)
         
-        # draw low text
+        # write lows
         sd_one_len = self.get_string_width(str(int(sd)))
         sd_two_len = self.get_string_width(str(int(sd * 2.0)))
         sd_three_len = self.get_string_width(str(int(sd * 3.0)))
@@ -114,6 +117,7 @@ class PDF(FPDF):
         self.set_xy(xpos*1.35, ypos+28)
         self.cell(h=10, txt='{:,.0f}'.format(int(sd)), align='L')
 
+        # write highs
         # high 1
         self.set_xy(xpos*1.53, ypos+28)
         self.cell(h=10, txt='{:,.0f}'.format(int(sd)), align='L')
@@ -130,16 +134,11 @@ class PDF(FPDF):
 def main():
     # create pdf
     pdf = PDF()
-    # describe pdf
-    print("page layout", pdf.page_layout)
-    # unit mm
-    print("default page dimensions", pdf.default_page_dimensions)
-    # (841.89, 595.28)mm
     
     # draw sd
     pdf.draw_sd(xpos=105, ypos=7, sd=25)
 
-    # symbol circle
+    # draw circle
     pdf.draw_circle(xpos=10, ypos=10, symbol='/ES')
 
     # high low close
@@ -147,12 +146,9 @@ def main():
               x_start=55, y_start=22,
               x_end=100, y_end=22)
 
-    # sample chart
-    pdf.image('static/chart.png', x=190, y=8,
+    # add chart
+    pdf.image('static/MES_chart.png', x=190, y=8,
     h=30, w=100)
-
-    # output file
-    pdf.output('static/test-fpdf.pdf')
 
 
 if __name__ == '__main__':
