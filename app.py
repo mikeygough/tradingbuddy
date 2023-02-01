@@ -41,7 +41,8 @@ def main():
         # append to allstats
         all_stats['{}'.format(symbol)] = stats
         # create plot
-        create_plot(df, FNAME='static/{}_chart.png'.format(symbol))
+        # plt.savefig(FNAME, bbox_inches='tight', transparent=True)
+        create_plot(df).savefig('static/{}_chart.png'.format(symbol), bbox_inches='tight', transparent=True)
 
     # create pdf
     pdf = PDF()

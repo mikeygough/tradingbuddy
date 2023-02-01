@@ -8,7 +8,7 @@ from matplotlib.dates import MonthLocator
 import matplotlib.ticker as mtick
 
 
-def create_plot(df, FNAME):
+def create_plot(df):
     ''' create a time series chart of close prices saved to FNAME. for use in tradingbuddy pdf. uses df generated from za_databento.py
     
     df: pandas dataframe generated from za_databento.py.
@@ -57,16 +57,15 @@ def create_plot(df, FNAME):
     ax.xaxis.set_major_formatter(date_form)
     ax.xaxis.set_major_locator(MonthLocator())
 
-    plt.savefig(FNAME, bbox_inches='tight', transparent=True)
+    return plt
+    # plt.savefig(FNAME, bbox_inches='tight', transparent=True)
     # plt.show()
 
 def main():
-    FNAME = 'static/chart.png'
-
     # read data
-    df = pd.read_csv('static/data.csv')
+    df = pd.read_csv('static/MES.csv')
 
-    create_plot(df, FNAME)
+    create_plot(df).savefig('static/test_chart.png', bbox_inches='tight', transparent=True)
 
 
 if __name__ == '__main__':
