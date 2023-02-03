@@ -1,6 +1,6 @@
 # tradingbuddy - [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python) final project
 
-#### Video Demo: 
+#### Video Demo: https://youtu.be/Ogssa1nArto
 
 ## about this project...
 
@@ -15,6 +15,7 @@ summary statistics include:
 * 3-month percent return
 
 here's a simple schema of what the .pdf looks like!
+
 ![alt text](static/schema.png)
 
 trading buddy currently supports
