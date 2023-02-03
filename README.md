@@ -1,6 +1,6 @@
 # tradingbuddy - [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python) final project
 
-#### Video Demo: https://www.youtube.com/watch?v=DnWMZ2d5u8Y
+#### Video Demo: 
 
 ## about this project...
 
