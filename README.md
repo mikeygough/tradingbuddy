@@ -1,4 +1,4 @@
-# tradingbuddy - [Harvard CS50P](https://www.edx.org/course/cs50s-introduction-to-programming-with-python) final project
+# tradingbuddy - [cs50p final project](https://github.com/mikeygough/cs50p)
 
 #### Video Demo: https://youtu.be/Ogssa1nArto
 
