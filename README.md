@@ -24,6 +24,8 @@ trading buddy currently supports
 * plot generation with matplotlib
 * pdf writing using fpdf2
 
+** please note that project.py is the _entire_ project in one file per cs50p's submission standards. during development i tried to break functionality into separate modules. those modules, in order of process, are za_databento.py, zb_pandas.py, zc_matplotlib.py and zd_fpdf.py. app.py contains the primary application logic and imports the required functions from each z_ module. **
+
 #### stack...
 
 tradingbuddy uses end of day closing prices over a three month period. the data is fetched
